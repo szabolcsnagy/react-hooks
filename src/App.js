@@ -1,25 +1,26 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {ContactForm,RegisterForm} from './components';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
+          <h1>React Hooks with Forms</h1>
+          <p>With hooks common functionality can be abstracted away from the concrete component.
+            In this example the diffrent forms use the same logic for handling state.
           </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
         </header>
+        <section aria-label="Forms">
+          <div className="form-wrapper">
+            <ContactForm name="John" />
+          </div>
+
+          <div className="form-wrapper">
+            <RegisterForm/>
+          </div>
+        </section>
       </div>
     );
   }
