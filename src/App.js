@@ -14,9 +14,8 @@ class App extends Component {
         </header>
         <section aria-label="Forms">
           <div className="form-wrapper">
-            <ContactForm name="John" />
+            <ContactForm values={{"name":"John"}} />
           </div>
-
           <div className="form-wrapper">
             <RegisterForm/>
           </div>
