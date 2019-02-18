@@ -1,3 +1,7 @@
+:root {
+  --pine-green: #077675;
+  --pear: #cce335;
+}
 body {
   margin: 0;
   padding: 0;
@@ -11,4 +15,39 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+/* view source link */
+.github-text {
+  transform: rotate(45deg);
+  fill: #fff;
+  font-size: 50px;
+}
+.github-corner {
+  fill:#fff;
+}
+.github-corner:focus,
+.github-corner:hover  {
+  fill: var(--pear);
+}
+
+.github-corner:focus .github-text,
+.github-corner:hover .github-text {
+  fill: var(--pear);
+}
+.octocat{
+  color:#282c34; 
+  position: absolute; 
+  top: 0; 
+  border: 0; 
+  right: 0;
+}
+.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}
+@keyframes octocat-wave{
+  0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}
+}
+  
+@media (max-width:500px){
+  .github-corner:hover .octo-arm{animation:none}
+  .github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}
 }

@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was setup to demo react hooks. View the [project page](https://szabolcsnagy.github.io/react-hooks/).
 
 ## Available Scripts
 
