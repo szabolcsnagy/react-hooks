@@ -16,9 +16,10 @@ class App extends Component {
           <div className="form-wrapper">
             <ContactForm values={{"name":"John"}} />
           </div>
+          
           <div className="form-wrapper">
             <RegisterForm/>
-          </div>
+          </div> 
         </section>
       </div>
     );

@@ -1,17 +1,32 @@
 import React from 'react'
 import {Debug} from './Debug'
-
+import {Loading} from './Loading'
 import {abstractForm} from './abstractForm'
 
 export function RegisterForm (props) {
-  const aForm = abstractForm({values: {name:'',email:'',email_again:''},...props})
+  const aForm = abstractForm({values: {name:'',email:'',email_again:''},...props,
+    validate: function (state) {
+      let errors = {}
+      if ( (state.touched.name) && state.values.name.length === 0) {
+        errors.name = 'Name is required'
+      }
+      if ( (state.touched.email) && state.values.email.length === 0) {
+        errors.email = 'Email is required'
+      }
+      if ( (state.touched.email_again) && state.values.email != state.values.email_again) {
+        errors.email_again = 'The 2 email address has to match'
+      }
+      return errors;
+    }
+  })
   const values = aForm.values
   const errors = aForm.errors
-  return (
-      <form>
+  const touched = aForm.touched
+  return ( aForm.isSubmitting ? <div><Loading statusText="Simulate Submit"/>  <Debug {...aForm.debug} /></div> :
+      <form onSubmit={aForm.handleSubmit}>
         <fieldset>
           <legend>Sign Up</legend>
-          <div className={"form-field-wrapper " + (errors.name? 'problem':'')}>
+          <div className={"form-field-wrapper " + (errors.name && touched.name? 'problem':'')}>
             <div className="field-status">
               {errors.name}
             </div>
@@ -26,7 +41,7 @@ export function RegisterForm (props) {
             </div>
           </div>
 
-          <div className="form-field-wrapper">
+          <div className={"form-field-wrapper " + (errors.email && touched.email? 'problem':'')}>
             <div className="field-status">
               {errors.email}
             </div>
@@ -41,7 +56,7 @@ export function RegisterForm (props) {
             </div>
           </div>
 
-          <div className="form-field-wrapper">
+          <div className={"form-field-wrapper " + (errors.email_again && touched.email_again ? 'problem':'')}>
             <div className="field-status">
               {errors.email_again}
             </div>

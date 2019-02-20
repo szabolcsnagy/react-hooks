@@ -1,19 +1,34 @@
 import React from 'react'
-
-
 import {abstractForm} from './abstractForm'
+import {Loading} from './Loading'
 import {Debug} from './Debug'
 
 export function ContactForm (props) {
-  const initialState = {...props, values: {name:'',email:'',...props.values}}
+
+  // initial state must list default values for all fields. 
+  // The initial values can be overriden by props
+  const initialState = {...props, values: {name:'',email:'',...props.values},
+    validate: function (state) {
+      let errors = {}
+      if ( (state.touched.name) && state.values.name.length === 0) {
+        errors.name = 'Name is required'
+      }
+      if ( (state.touched.email) && state.values.email.length === 0) {
+        errors.email = 'Email is required'
+      }
+      return errors;
+    }
+  }
   const aForm = abstractForm(initialState)
   const values = aForm.values
   const errors = aForm.errors
-  return (
-      <form>
+  const touched = aForm.touched
+  return ( aForm.isSubmitting ? <div><Loading statusText="Simulate Submit"/>  <Debug {...aForm.debug} /></div> :
+      <form onSubmit={aForm.handleSubmit}>
         <fieldset>
           <legend>Contact Us</legend>
-          <div className={"form-field-wrapper " + (errors.name? 'problem':'')}>
+          <div className={"form-field-wrapper " + (errors.name && touched.name? 'problem':'')}>
+            <div className="field-status">{errors.name}</div>
             <div className="field-info">
               <label htmlFor="name">Name</label>
             </div>
@@ -25,7 +40,8 @@ export function ContactForm (props) {
             </div>
           </div>
 
-          <div className={"form-field-wrapper " + (errors.email? 'problem':'')}>
+          <div className={"form-field-wrapper " + (errors.email && touched.email ? 'problem':'')}>
+          <div className="field-status">{errors.email}</div>
             <div className="field-info">
               <label htmlFor="email">Email</label>
             </div>
@@ -44,19 +60,6 @@ export function ContactForm (props) {
           </div>
         </fieldset>
         <Debug {...aForm.debug} />
-      </form>)
+      </form>
+    )
 }
-
-
-/*
-export class Form extends React.Component {
-  render() {
-    return (<form>
-      <fieldset>
-        <legend>Hello World Form</legend>
-      </fieldset>
-    </form>)
-  }
-}
-*/
-

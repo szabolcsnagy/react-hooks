@@ -43,6 +43,12 @@ body {
   padding: 0.5rem 1rem 1.25rem 0.75rem;
 }
 
+.form-field-wrapper .field-status {
+  display: none;
+}
+.form-field-wrapper.problem .field-status {
+  display: inherit;
+}
 .form-field-wrapper.problem {
   border: 1px solid #ff3387;
   
@@ -86,5 +92,16 @@ legend {
   padding: .5rem;
   background: #555;
   color: #fff;
-  letterSpacing: 1px;
+  letter-spacing: 1px;
+}
+
+.loading {
+  fill: #282c34;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-status {
+  padding-left: 1rem;
 }
